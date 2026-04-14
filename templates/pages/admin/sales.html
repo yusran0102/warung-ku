@@ -30,8 +30,8 @@
             <td class="px-4 py-3 font-mono text-xs font-medium text-teal-600 whitespace-nowrap">{{.SaleNumber}}</td>
             <td class="px-4 py-3 whitespace-nowrap">
               {{if .Customer}}{{.Customer.Name}}
-              {{else if .NonMemberCustomer}}{{.NonMemberCustomer.Name}} <span class="text-xs text-gray-400">(umum)</span>
-              {{else}}<span class="text-gray-400">-</span>{{end}}
+              {{else if .NonMemberCustomer}}{{.NonMemberCustomer.Name}} <span class="text-xs text-gray-400">(non-member)</span>
+              {{else}}<span class="text-gray-400 text-xs italic">Pelanggan Umum</span>{{end}}
             </td>
             <td class="px-4 py-3 font-medium whitespace-nowrap">{{formatRupiah .Total}}</td>
             <td class="px-4 py-3 text-gray-500 whitespace-nowrap">{{.PaymentMethod}}</td>
