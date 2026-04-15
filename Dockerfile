@@ -11,7 +11,7 @@ RUN go mod download
 COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
-    go build -ldflags="-w -s" -o bin/warungku .
+    go build -ldflags="-w -s" -o bin/warung-ku .
 
 # ── Stage 2: Runtime ──────────────────────────────────────────────────────────
 FROM alpine:3.19
@@ -24,7 +24,7 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 WORKDIR /app
 
 # Copy binary
-COPY --from=builder /app/bin/warungku .
+COPY --from=builder /app/bin/warung-ku .
 
 # Copy runtime assets (templates + static must travel with the binary)
 COPY --from=builder /app/templates ./templates
@@ -37,4 +37,4 @@ USER appuser
 EXPOSE 3000
 
 # App reads DB_URL, JWT_SECRET, PORT from environment
-CMD ["./warungku"]
+CMD ["./warung-ku"]

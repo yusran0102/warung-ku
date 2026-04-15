@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/yusran0102/warungku/internal/database"
-	"github.com/yusran0102/warungku/internal/models"
-	"github.com/yusran0102/warungku/internal/utils"
+	"github.com/yusran0102/warung-ku/internal/database"
+	"github.com/yusran0102/warung-ku/internal/models"
+	"github.com/yusran0102/warung-ku/internal/utils"
 	"gorm.io/gorm"
 )
 

@@ -1,4 +1,4 @@
-# Warungku — Deployment Guide
+# warung-ku — Deployment Guide
 
 ## Architecture Overview
 
@@ -31,9 +31,9 @@ curl -fsSL https://get.docker.com | sh
 sudo usermod -aG docker $USER
 
 # Create app directory
-sudo mkdir -p /opt/warungku
-sudo chown $USER /opt/warungku
-cd /opt/warungku
+sudo mkdir -p /opt/warung-ku
+sudo chown $USER /opt/warung-ku
+cd /opt/warung-ku
 
 # Copy files: Dockerfile, docker-compose.yml, nginx.conf, .env.production
 # (SCP from your machine or clone your repo)
@@ -59,19 +59,19 @@ sudo certbot certonly --standalone -d yourdomain.com
 # /etc/letsencrypt/live/yourdomain.com/fullchain.pem
 # /etc/letsencrypt/live/yourdomain.com/privkey.pem
 
-# Copy or symlink them into /opt/warungku/ssl/
+# Copy or symlink them into /opt/warung-ku/ssl/
 mkdir ssl
 ln -s /etc/letsencrypt/live/yourdomain.com/fullchain.pem ssl/fullchain.pem
 ln -s /etc/letsencrypt/live/yourdomain.com/privkey.pem   ssl/privkey.pem
 
 # Auto-renew (add to crontab)
-0 3 * * * certbot renew --quiet && docker compose -f /opt/warungku/docker-compose.yml restart nginx
+0 3 * * * certbot renew --quiet && docker compose -f /opt/warung-ku/docker-compose.yml restart nginx
 ```
 
 ### Deploying updates
 
 ```bash
-cd /opt/warungku
+cd /opt/warung-ku
 git pull                          # if using git on the server
 docker compose build --no-cache app
 docker compose up -d app
@@ -101,8 +101,8 @@ curl -L https://fly.io/install.sh | sh
 
 # From your project root
 fly launch    # detects Go app, auto-creates fly.toml
-fly postgres create --name warungku-db
-fly postgres attach warungku-db
+fly postgres create --name warung-ku-db
+fly postgres attach warung-ku-db
 
 # Set JWT secret
 fly secrets set JWT_SECRET=your-secret-here APP_ENV=production
@@ -121,11 +121,11 @@ Best for: apps with uneven/spiky traffic. Scales to zero.
 
 ```bash
 # Build and push to Google Container Registry
-gcloud builds submit --tag gcr.io/YOUR_PROJECT/warungku
+gcloud builds submit --tag gcr.io/YOUR_PROJECT/warung-ku
 
 # Deploy
-gcloud run deploy warungku \
-  --image gcr.io/YOUR_PROJECT/warungku \
+gcloud run deploy warung-ku \
+  --image gcr.io/YOUR_PROJECT/warung-ku \
   --platform managed \
   --region asia-southeast2 \
   --allow-unauthenticated \
@@ -157,8 +157,8 @@ The workflow in `.github/workflows/deploy.yml` will:
 
 ```bash
 # Daily Postgres backup (add to server crontab)
-0 2 * * * docker exec warungku_db pg_dump -U warungku warungku_prod \
-  | gzip > /opt/backups/warungku_$(date +\%Y\%m\%d).sql.gz
+0 2 * * * docker exec warung-ku_db pg_dump -U warung-ku warung-ku_prod \
+  | gzip > /opt/backups/warung-ku_$(date +\%Y\%m\%d).sql.gz
 
 # Keep 30 days
 find /opt/backups -name "*.sql.gz" -mtime +30 -delete
@@ -166,7 +166,7 @@ find /opt/backups -name "*.sql.gz" -mtime +30 -delete
 
 ---
 
-## Quick recommendation for warungku
+## Quick recommendation for warung-ku
 
 | Situation | Recommendation |
 |-----------|----------------|

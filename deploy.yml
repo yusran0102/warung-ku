@@ -1,4 +1,4 @@
-name: Deploy warungku
+name: Deploy warung-ku
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /opt/warungku
+            cd /opt/warung-ku
             docker compose pull
             docker compose up -d --remove-orphans
             docker image prune -f

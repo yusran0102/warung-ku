@@ -10,11 +10,11 @@ dev:
 
 ## Build binary
 build:
-	go build -o bin/warungku .
+	go build -o bin/warung-ku .
 
 ## Run built binary
 run:
-	./bin/warungku
+	./bin/warung-ku
 
 ## Install Air for hot reload
 install-air:

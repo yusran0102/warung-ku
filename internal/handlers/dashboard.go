@@ -2,9 +2,9 @@ package handlers
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/yusran0102/warungku/internal/database"
-	"github.com/yusran0102/warungku/internal/middleware"
-	"github.com/yusran0102/warungku/internal/models"
+	"github.com/yusran0102/warung-ku/internal/database"
+	"github.com/yusran0102/warung-ku/internal/middleware"
+	"github.com/yusran0102/warung-ku/internal/models"
 )
 
 func AdminDashboard(c *fiber.Ctx) error {

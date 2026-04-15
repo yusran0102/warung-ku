@@ -3,8 +3,8 @@ version: "3.9"
 services:
   app:
     build: .
-    image: warungku:latest
-    container_name: warungku_app
+    image: warung-ku:latest
+    container_name: warung-ku_app
     restart: unless-stopped
     ports:
       - "3000:3000"
@@ -17,11 +17,11 @@ services:
       db:
         condition: service_healthy
     networks:
-      - warungku_net
+      - warung-ku_net
 
   db:
     image: postgres:16-alpine
-    container_name: warungku_db
+    container_name: warung-ku_db
     restart: unless-stopped
     environment:
       POSTGRES_USER: "${POSTGRES_USER}"
@@ -35,7 +35,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - warungku_net
+      - warung-ku_net
     # Do NOT expose port 5432 in production!
     # ports:
     #   - "5432:5432"   # uncomment for local dev only
@@ -43,7 +43,7 @@ services:
   # Optional: Nginx reverse proxy (recommended for production)
   nginx:
     image: nginx:alpine
-    container_name: warungku_nginx
+    container_name: warung-ku_nginx
     restart: unless-stopped
     ports:
       - "80:80"
@@ -54,11 +54,11 @@ services:
     depends_on:
       - app
     networks:
-      - warungku_net
+      - warung-ku_net
 
 volumes:
   postgres_data:
 
 networks:
-  warungku_net:
+  warung-ku_net:
     driver: bridge

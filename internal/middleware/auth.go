@@ -6,7 +6,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/yusran0102/warungku/internal/models"
+	"github.com/yusran0102/warung-ku/internal/models"
 )
 
 type Claims struct {
